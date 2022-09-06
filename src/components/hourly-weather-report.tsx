@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { IWeatherDataDay } from '../types';
 
-const HourlyWeatherReport: FunctionComponent<{ hourlyWeather?: IWeatherDataDay }> = ({hourlyWeather}) => {
+const HourlyWeatherReport: FunctionComponent<{ hourlyWeather?: IWeatherDataDay, type: string }> = ({hourlyWeather, type}) => {
     if(!hourlyWeather || !hourlyWeather.hourly) {
         return <></>;
     }
@@ -39,7 +39,7 @@ const HourlyWeatherReport: FunctionComponent<{ hourlyWeather?: IWeatherDataDay }
                     <div key={key} className="details text-center">
                         <div className="hour">{formatHour(key)}</div>
                         <div className="icon"><img src={icon} alt={hour.icon}></img></div>
-                        <div className="temperature">{hour.temperature.fahrenheit}°</div>
+                        <div className="temperature">{type === 'fahrenheit' ? hour.temperature.fahrenheit : hour.temperature.celsius}°</div>
                     </div>
                 );
             })

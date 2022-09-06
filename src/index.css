@@ -143,3 +143,36 @@ body {
 .weather-hourly .details:first-of-type .temperature {
   font-size: 44px;
 }
+
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #222222;
+    color: #fff;
+  }
+
+
+  .weather-widget{
+    background-color: #282828;
+    border: 1px solid rgba(51, 51, 51, 0.3);
+  }
+
+  .weather-day {
+    background-color: #282828;
+    border-color: #333333;
+  }
+
+  .weather-day:first-of-type {
+    background-color: #333333;
+  }
+
+  .weather-hourly .details:first-of-type .hour,
+  .weather-c-f .selected {
+    color: #fff;
+  }
+
+  .weather-conditions {
+    color: #ccc;
+  }
+
+}
