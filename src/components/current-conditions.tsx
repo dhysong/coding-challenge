@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { IWeatherDataDay } from '../types';
+import { getKeyFromHour } from '../utility';
 
-const CurrentConditions: FunctionComponent<{ weather?: IWeatherDataDay }> = ({weather}) => {
-
-    const zeroPad = (num:number, places:number) => String(num).padStart(places, '0')
+const CurrentConditions: FunctionComponent<{ weather?: IWeatherDataDay[] }> = ({weather}) => {
 
     const date = new Date();
-    const key = `${zeroPad(date.getHours(), 2)}:00:00`;
-    const currentHour = weather?.hourly[key];
+    const key = getKeyFromHour(date.getHours());
+    const currentHour = weather && weather[0] && weather[0].hourly ? weather[0].hourly[key] : null;
 
     return (
         <>        

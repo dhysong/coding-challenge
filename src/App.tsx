@@ -7,7 +7,6 @@ import { IWeatherDataDay } from './types';
 function App() {
 
   const [weatherData, setWeatherData] = useState({daily: [], latitude: 0, longitude: 0});
-  const [currentDay, setCurrentDay] = useState<IWeatherDataDay>();
 
   useEffect(() => {
    const getGPS = async () => {
@@ -28,14 +27,13 @@ function App() {
       let pos = await getGPS(); 
       const weather = await GetWeather(pos);
       setWeatherData(weather);
-      setCurrentDay(weather.daily[Object.keys(weather.daily)[0]]);
     };
 
     getWeatherData();
   }, []);
 
   return (
-    <WeatherWidget weather={weatherData} currentDay={currentDay} />
+    <WeatherWidget weather={weatherData} />
   );
 }
 

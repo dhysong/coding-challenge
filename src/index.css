@@ -63,9 +63,10 @@ body {
   border-width: 1px 1px 0px 0px;
   border-style: solid;
   border-color: #E0E0E0;
+  cursor: pointer;
 }
 
-.weather-day:first-of-type {
+.weather-day.selected {
   background: #FFFFFF;
   border-top: 1px solid #222222;
   border-bottom-left-radius: 8px;
@@ -92,7 +93,7 @@ body {
   font-weight: 600;
 }
 
-.weather-day:first-of-type .weekday {
+.weather-day.selected .weekday {
   font-weight: 400;
 }
 
@@ -162,7 +163,7 @@ body {
     border-color: #333333;
   }
 
-  .weather-day:first-of-type {
+  .weather-day.selected {
     background-color: #333333;
   }
 

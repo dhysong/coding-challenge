@@ -1,25 +1,38 @@
 import React, { FunctionComponent } from 'react';
-import { IWeatherDataDay } from '../types';
+import { IDailyWeatherReport, IWeatherDataDay } from '../types';
+import { getKeyFromHour, isToday } from '../utility';
 
-const HourlyWeatherReport: FunctionComponent<{ hourlyWeather?: IWeatherDataDay, type: string }> = ({hourlyWeather, type}) => {
-    if(!hourlyWeather || !hourlyWeather.hourly) {
+const HourlyWeatherReport: FunctionComponent<{ currentDate:string, hourlyWeather?: IWeatherDataDay[], type: string }> = ({currentDate, hourlyWeather, type}) => {
+    if(!hourlyWeather || hourlyWeather.length === 0 || hourlyWeather[0] == null || hourlyWeather[0].hourly === null) {
         return <></>;
     }
 
-    const hourMap: object = {
-        "11:00:00": null,
-        "14:00:00": null,
-        "17:00:00": null,
-        "20:00:00": null,
-        "23:00:00": null,
-        "02:00:00": null,
-        "05:00:00": null,
-        "08:00:00": null,
-    };
+    let hourMap: IDailyWeatherReport = {};    
+    const date = new Date();
+    const startHour = isToday(currentDate)  ? date.getHours() : 2;
 
-    Object.keys(hourlyWeather.hourly).map(key => {
+    const hourCount:number = 8;
+    for (let i = 0; i < hourCount; i++) {
+        let hour = startHour + (i * 3);
+        let key = getKeyFromHour(hour);
+        if(hour <= 24) {
+            if(hourlyWeather[0].hourly.hasOwnProperty(key)) {
+                hourMap[key] = null;
+            }
+        }
+        else {
+            hour = hour % 24;
+            key = getKeyFromHour(hour);
+            if(hourlyWeather[1].hourly.hasOwnProperty(key)) {
+                hourMap[key] = null;
+            }
+        }
+
+    }
+
+    Object.keys(hourlyWeather[0].hourly).map(key => {
         if(hourMap.hasOwnProperty(key)) {
-            (hourMap as any)[key] = hourlyWeather.hourly[key];
+            (hourMap as any)[key] = hourlyWeather[0].hourly[key];
         }   
         return true;
     });
@@ -33,7 +46,7 @@ const HourlyWeatherReport: FunctionComponent<{ hourlyWeather?: IWeatherDataDay, 
         <>
         {
             Object.keys(hourMap).map(key => {
-                const hour = hourlyWeather.hourly[key];
+                const hour = hourlyWeather[0].hourly[key];
                 const icon = `icons/${hour.icon}.svg`;
                 return (
                     <div key={key} className="details text-center">
@@ -49,3 +62,4 @@ const HourlyWeatherReport: FunctionComponent<{ hourlyWeather?: IWeatherDataDay, 
 }
 
 export default HourlyWeatherReport;
+

@@ -16,7 +16,7 @@ export interface IWeatherDataDay {
 }
 
 export interface IDailyWeatherReport {
-    [key: string]: IWeatherDataDay
+    [key: string]: IWeatherDataDay|null
 }
 
 export interface IWeatherReport {
