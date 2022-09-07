@@ -12,6 +12,10 @@ Data was pulled from this [API](https://floral-paper-1590.fly.dev/?latitude=40.7
 
 [Figma File](https://www.figma.com/file/1F0g6njjQpocBbygi0KoK3/Weather-App)
 
+## Feedback
+
+[Loom Recording](https://www.loom.com/share/4550fab0f88440619b57964386291f68)
+
 ## Available Scripts
 
 In the project directory, you can run:
